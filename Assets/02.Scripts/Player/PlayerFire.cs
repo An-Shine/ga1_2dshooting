@@ -8,7 +8,9 @@ public class PlayerFire : MonoBehaviour
     // 필요 속성 : 총알 프리펩, 생성위치(발사지점)
 
     public GameObject BulletPrefab;
+    public GameObject SubBulletPrefabs;
     public Transform[] FirePoints;
+    public Transform[] SubFirePoints;
     //public Transform LeftFirePoint;
     //public Transform RightFirePoint;
 
@@ -31,7 +33,7 @@ public class PlayerFire : MonoBehaviour
         }
         
         
-        // 1번 눌러서 자동발사 모드 설정
+        // 1번 눌러서 자동발사 모드 설정 , 다시 1번 누르면 자동모드 OFF
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             if (isAutoFire == false)
@@ -43,13 +45,10 @@ public class PlayerFire : MonoBehaviour
                 isAutoFire = false;
             }
         }
-        
         if (isAutoFire == true && CurrentCooldown <= 0)
         {
             AutoFire();
         }
-
-                
     }
 
     private void Fire()
@@ -68,7 +67,13 @@ public class PlayerFire : MonoBehaviour
             foreach (Transform firePoint in FirePoints)
             {
                 GameObject bullet = Instantiate(BulletPrefab);
-                bullet.transform.position = firePoint.position;    
+                bullet.transform.position = firePoint.position;
+            }
+
+            foreach (Transform firePoint in SubFirePoints)
+            {
+                GameObject bullet = Instantiate(SubBulletPrefabs);
+                bullet.transform.position = firePoint.position;
             }
         }
     }
@@ -79,6 +84,11 @@ public class PlayerFire : MonoBehaviour
         {
             GameObject bullet = Instantiate(BulletPrefab);
             bullet.transform.position = firePoint.position;    
+        }
+        foreach (Transform firePoint in SubFirePoints)
+        {
+            GameObject bullet = Instantiate(SubBulletPrefabs);
+            bullet.transform.position = firePoint.position;
         }
         CurrentCooldown = FireCooldown;
     }
