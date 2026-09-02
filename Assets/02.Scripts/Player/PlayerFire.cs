@@ -31,6 +31,8 @@ public class PlayerFire : MonoBehaviour
         if (CurrentCooldown <= 0 && Input.GetKeyDown(KeyCode.Space)&& isAutoFire!=true)
         {
             Fire();
+            
+            // 쿨타이머 초기화 (중요)
             CurrentCooldown = FireCooldown;
         }
         
@@ -38,14 +40,7 @@ public class PlayerFire : MonoBehaviour
         // 1번 눌러서 자동발사 모드 설정 , 다시 1번 누르면 자동모드 OFF
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            if (isAutoFire == false)
-            {
-                isAutoFire = true;    
-            }
-            else if (isAutoFire == true)
-            {
-                isAutoFire = false;
-            }
+            isAutoFire = !isAutoFire;
         }
         if (isAutoFire == true && CurrentCooldown <= 0)
         {
