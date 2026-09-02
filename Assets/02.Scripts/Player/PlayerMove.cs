@@ -44,6 +44,18 @@ public class PlayerMove : MonoBehaviour
             transform.position = new Vector2(transform.position.x, -4.5f);
         }
         
+        // 실습과제 2번
+        if (transform.position.x > 3.0f)
+        {
+            transform.position = new Vector2(-4.5f, transform.position.y);
+        }
+        
+        else if (transform.position.x < -4.5f)
+        {
+            transform.position = new Vector2(3.0f, transform.position.y);
+        }
+        
+        
 
     }
 }
