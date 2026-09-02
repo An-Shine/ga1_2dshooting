@@ -8,17 +8,23 @@ public class PlayerFire : MonoBehaviour
 
     public GameObject BulletPrefab;
     public Transform FirePoint;
+    
     private void Update()
-    {   
+    {
+        Fire();
+    }
+
+    private void Fire()
+    {
         // 1. 스페이스바를 누르면 
         if (Input.GetKeyDown(KeyCode.Space))
         {   
             // 2. 총알 프리펩을 생성한다
             GameObject bullet = Instantiate(BulletPrefab);
             bullet.transform.position = FirePoint.position;
+            
         }
     }
-
     
     
 }
