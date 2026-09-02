@@ -61,7 +61,7 @@ public class PlayerMove : MonoBehaviour
             transform.position = new Vector2(limitX, transform.position.y);
         }
 
-        if (Input.GetKey(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             speed -= speedCount;
             if (speed <= speedLimit)
@@ -70,7 +70,7 @@ public class PlayerMove : MonoBehaviour
             }
         }
 
-        if (Input.GetKey(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             speed+= speedCount;
         }
