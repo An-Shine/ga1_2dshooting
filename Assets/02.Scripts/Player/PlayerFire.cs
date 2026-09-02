@@ -14,6 +14,8 @@ public class PlayerFire : MonoBehaviour
 
     public float FireCooldown = 2.0f;
     public float CurrentCooldown;
+
+    public bool isAutoFire = false;
     private void Update()
     {
         // 쿨타임 적용
@@ -22,11 +24,32 @@ public class PlayerFire : MonoBehaviour
             CurrentCooldown -= Time.deltaTime;
         }
 
-        if (CurrentCooldown <= 0 && Input.GetKeyDown(KeyCode.Space))
+        if (CurrentCooldown <= 0 && Input.GetKeyDown(KeyCode.Space)&& isAutoFire!=true)
         {
             Fire();
             CurrentCooldown = FireCooldown;
         }
+        
+        
+        // 1번 눌러서 자동발사 모드 설정
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            if (isAutoFire == false)
+            {
+                isAutoFire = true;    
+            }
+            else if (isAutoFire == true)
+            {
+                isAutoFire = false;
+            }
+        }
+        
+        if (isAutoFire == true && CurrentCooldown <= 0)
+        {
+            AutoFire();
+        }
+
+                
     }
 
     private void Fire()
@@ -47,15 +70,16 @@ public class PlayerFire : MonoBehaviour
                 GameObject bullet = Instantiate(BulletPrefab);
                 bullet.transform.position = firePoint.position;    
             }
-            
-
-
-
-
-
         }
-        
     }
-    
-    
+
+    private void AutoFire()
+    {
+        foreach (Transform firePoint in FirePoints)
+        {
+            GameObject bullet = Instantiate(BulletPrefab);
+            bullet.transform.position = firePoint.position;    
+        }
+        CurrentCooldown = FireCooldown;
+    }
 }
