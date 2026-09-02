@@ -33,7 +33,17 @@ public class PlayerMove : MonoBehaviour
         
         // 새로운 위치 : 현재위치 + (방향 * 속력 * 시간)
         //transform.position += (Vector3)direction * Speed * Time.deltaTime;
-
+        
+        // 실습과제 1번
+        if (transform.position.y > -0.6f)
+        {
+            transform.position = new Vector2(transform.position.x, -0.6f);
+        }
+        else if (transform.position.y < -4.5f)
+        {
+            transform.position = new Vector2(transform.position.x, -4.5f);
+        }
+        
 
     }
 }
