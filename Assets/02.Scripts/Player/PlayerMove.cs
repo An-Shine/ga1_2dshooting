@@ -9,8 +9,7 @@ public class PlayerMove : MonoBehaviour
     public float Speed;
     public float LimitTopY = -0.6f;
     public float LimitBottomY = -4.5f;
-    public float LimitLeftX = -4.5f;
-    public float LimitRightX = 3.0f;
+    public float LimitX = 3.0f;
     
     // 매 프레임마다 실행된다
     // 초당 프레임 실행 횟수 : 별다른 설정이 없을경우 가능한 많이
@@ -50,14 +49,28 @@ public class PlayerMove : MonoBehaviour
         }
         
         // 실습과제 2번
-        if (transform.position.x > LimitRightX)
+        if (transform.position.x > LimitX)
         {
-            transform.position = new Vector2(LimitLeftX, transform.position.y);
+            transform.position = new Vector2(-LimitX, transform.position.y);
         }
         
-        else if (transform.position.x < LimitLeftX)
+        else if (transform.position.x < -LimitX)
         {
-            transform.position = new Vector2(LimitRightX, transform.position.y);
+            transform.position = new Vector2(LimitX, transform.position.y);
+        }
+
+        if (Input.GetKey(KeyCode.E))
+        {
+            Speed--;
+            if (Speed <= 0.1f)
+            {
+                Speed = 0.1f; // 더이상 떨어지지 않게끔 , 하지만 기획의도에 따라 0으로 가게끔 수정가능
+            }
+        }
+
+        if (Input.GetKey(KeyCode.Q))
+        {
+            Speed++;
         }
         
         
