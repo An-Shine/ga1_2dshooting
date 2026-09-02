@@ -18,14 +18,16 @@ public class PlayerFire : MonoBehaviour
     public float CurrentCooldown;
 
     public bool isAutoFire = false;
+
+    private void Start()
+    {
+        CurrentCooldown = FireCooldown;
+    }
     private void Update()
     {
         // 쿨타임 적용
-        if (CurrentCooldown > 0)
-        {
-            CurrentCooldown -= Time.deltaTime;
-        }
-
+        CurrentCooldown -= Time.deltaTime;
+        
         if (CurrentCooldown <= 0 && Input.GetKeyDown(KeyCode.Space)&& isAutoFire!=true)
         {
             Fire();
