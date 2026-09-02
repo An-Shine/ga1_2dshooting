@@ -12,13 +12,21 @@ public class PlayerFire : MonoBehaviour
     //public Transform LeftFirePoint;
     //public Transform RightFirePoint;
 
-    public float FireCooldown;
+    public float FireCooldown = 2.0f;
     public float CurrentCooldown;
     private void Update()
     {
-        Fire();
-        
-        
+        // 쿨타임 적용
+        if (CurrentCooldown > 0)
+        {
+            CurrentCooldown -= Time.deltaTime;
+        }
+
+        if (CurrentCooldown <= 0 && Input.GetKeyDown(KeyCode.Space))
+        {
+            Fire();
+            CurrentCooldown = FireCooldown;
+        }
     }
 
     private void Fire()
