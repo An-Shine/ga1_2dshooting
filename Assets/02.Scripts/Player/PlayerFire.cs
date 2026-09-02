@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerFire : MonoBehaviour
@@ -7,7 +8,9 @@ public class PlayerFire : MonoBehaviour
     // 필요 속성 : 총알 프리펩, 생성위치(발사지점)
 
     public GameObject BulletPrefab;
-    public Transform FirePoint;
+    //public Transform FirePoint;
+    public Transform LeftFirePoint;
+    public Transform RightFirePoint;
     
     private void Update()
     {
@@ -20,9 +23,10 @@ public class PlayerFire : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {   
             // 2. 총알 프리펩을 생성한다
-            GameObject bullet = Instantiate(BulletPrefab);
-            bullet.transform.position = FirePoint.position;
-            
+            GameObject leftBullet = Instantiate(BulletPrefab);
+            leftBullet.transform.position = LeftFirePoint.position;
+            GameObject rightBullet = Instantiate(BulletPrefab);
+            rightBullet.transform.position = RightFirePoint.position;            
         }
     }
     

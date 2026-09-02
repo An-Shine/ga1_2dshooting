@@ -4,7 +4,8 @@ public class Bullet : MonoBehaviour
 {
     public float Speed;
     private void Update()
-    {   
-        transform.Translate(Vector2.up * (Speed * Time.deltaTime));
+    {
+        Vector2 direction = Vector2.up;
+        transform.Translate(direction * (Speed * Time.deltaTime));
     }
 }
