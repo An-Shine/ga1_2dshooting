@@ -7,6 +7,10 @@ public class PlayerMove : MonoBehaviour
     
     // 매직넘버 방지 : 보는사람에 따라 의미가 달라질 수 있는 숫자 값을 매직넘버 라고함
     public float Speed;
+    public float LimitTopY = -0.6f;
+    public float LimitBottomY = -4.5f;
+    public float LimitLeftX = -4.5f;
+    public float LimitRightX = 3.0f;
     
     // 매 프레임마다 실행된다
     // 초당 프레임 실행 횟수 : 별다른 설정이 없을경우 가능한 많이
@@ -15,6 +19,7 @@ public class PlayerMove : MonoBehaviour
         // 1. 키보드 입력을 받는다 (GetAxis / GetAxisRaw)
         float h = Input.GetAxisRaw("Horizontal");  // 키보드 왼/오른쪽 입력 상태에 따라 -1f ~ 0 ~ 1f 를 반환
         float v = Input.GetAxisRaw("Vertical");    // 키보드 위/아래 입력 상태에 따라 -1f ~ 0 ~ 1f 를 반환
+        
         
         Debug.Log($"h:{h}, v:{v}");
         
@@ -35,24 +40,24 @@ public class PlayerMove : MonoBehaviour
         //transform.position += (Vector3)direction * Speed * Time.deltaTime;
         
         // 실습과제 1번
-        if (transform.position.y > -0.6f)
+        if (transform.position.y > LimitTopY)
         {
-            transform.position = new Vector2(transform.position.x, -0.6f);
+            transform.position = new Vector2(transform.position.x, LimitTopY);
         }
-        else if (transform.position.y < -4.5f)
+        else if (transform.position.y < LimitBottomY)
         {
-            transform.position = new Vector2(transform.position.x, -4.5f);
+            transform.position = new Vector2(transform.position.x, LimitBottomY);
         }
         
         // 실습과제 2번
-        if (transform.position.x > 3.0f)
+        if (transform.position.x > LimitRightX)
         {
-            transform.position = new Vector2(-4.5f, transform.position.y);
+            transform.position = new Vector2(LimitLeftX, transform.position.y);
         }
         
-        else if (transform.position.x < -4.5f)
+        else if (transform.position.x < LimitLeftX)
         {
-            transform.position = new Vector2(3.0f, transform.position.y);
+            transform.position = new Vector2(LimitRightX, transform.position.y);
         }
         
         
