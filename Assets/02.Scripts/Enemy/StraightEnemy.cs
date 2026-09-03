@@ -1,12 +1,10 @@
 using UnityEngine;
 
-public class StraightEnemy : MonoBehaviour
+public class StraightEnemy : Enemy
 {
-    private void Start()
+    protected override void Move()
     {
-    }
-
-    private void Update()
-    {
+        Vector2 direction = Vector2.down;
+        transform.Translate(direction * (_moveSpeed * Time.deltaTime));
     }
 }
