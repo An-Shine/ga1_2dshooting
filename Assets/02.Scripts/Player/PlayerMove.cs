@@ -28,7 +28,7 @@ public class PlayerMove : MonoBehaviour
         float v = Input.GetAxisRaw("Vertical"); // 키보드 위/아래 입력 상태에 따라 -1f ~ 0 ~ 1f 를 반환
 
 
-        Debug.Log($"h:{h}, v:{v}");
+        // Debug.Log($"h:{h}, v:{v}");
 
         // 2. 키보드 입력에 따라 방향을 구한다
         // 게임에는 벡터 라는 타입이 있다. 벡터는 크기와 방향을 의미한다
