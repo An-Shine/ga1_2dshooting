@@ -2,20 +2,22 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public float Speed;
-    public float Health;
-    public GameObject EnemyPrefab;
-    public Transform EnemySpawnPoint;
+    [SerializeField] private float _moveSpeed;
+    [SerializeField] private int _health;
 
     private void Update()
     {
         Vector2 direction = Vector2.down;
-        transform.Translate(direction * (Speed * Time.deltaTime));
+        transform.Translate(direction * (_moveSpeed * Time.deltaTime));
     }
 
-    private void SpawnEnemy()
+    public void TakeDamage(int damage)
     {
-        GameObject enemy = Instantiate(EnemyPrefab);
-        enemy.transform.position = EnemySpawnPoint.position;
+        _health -= damage;
+        if (_health <= 0)
+        {
+            // 충돌한 대상 파괴 (Enemy)
+            Destroy(gameObject);
+        }
     }
 }

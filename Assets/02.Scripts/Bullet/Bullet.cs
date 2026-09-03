@@ -4,7 +4,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public float MoveSpeed;
-    public float BulletDamage = 40;
+    public int Damage;
 
     private void Update()
     {
@@ -12,8 +12,8 @@ public class Bullet : MonoBehaviour
         transform.Translate(direction * (MoveSpeed * Time.deltaTime));
     }
 
-    // 충돌 관련 이벤트
-    private void OnCollisionEnter2D(Collision2D collision)
+    // 트리거 관련 이벤트
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         // Debug.Log("충돌했다!");
 
@@ -25,14 +25,7 @@ public class Bullet : MonoBehaviour
         {
             // GetComponent<타입>() -> 게임 오브젝트가 가지고 있는 컴포넌트를 참조
             Enemy enemy = collision.gameObject.GetComponent<Enemy>();
-
-            enemy.Health -= BulletDamage;
-
-            if (enemy.Health <= 0)
-            {
-                // 충돌한 대상 파괴 (Enemy)
-                Destroy(collision.gameObject);
-            }
+            enemy.TakeDamage(Damage);
         }
     }
 }
