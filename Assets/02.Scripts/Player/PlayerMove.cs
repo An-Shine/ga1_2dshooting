@@ -13,7 +13,6 @@ public class PlayerMove : MonoBehaviour
     public float speedCount = 1.0f;
     public float speedLimit = 1.0f;
 
-
     // 매 프레임마다 실행된다
     // 초당 프레임 실행 횟수 : 별다른 설정이 없을경우 가능한 많이
     private void Update()
