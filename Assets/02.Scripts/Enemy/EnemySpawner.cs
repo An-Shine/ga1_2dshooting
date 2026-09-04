@@ -6,7 +6,8 @@ public class EnemySpawner : MonoBehaviour
     private float _timer;
 
     // -생성할 프리펩
-    [Header("스폰할 적 프리펩")][SerializeField] private Enemy _enemyPrefab;
+    [Header("스폰할 적 프리펩")][SerializeField] private GameObject[] _enemyPrefabs;
+    [SerializeField] private int[] _spawnRate;
 
     private void Update()
     {
@@ -21,7 +22,19 @@ public class EnemySpawner : MonoBehaviour
 
     private void Spawn()
     {
-        Enemy enemy = Instantiate(_enemyPrefab);
-        enemy.transform.position = transform.position; // 나의위치 로 초기화
+        int randomRate = Random.Range(0, 100);
+        int spawnCount = 0;
+
+        for (int i = 0; i < _enemyPrefabs.Length; i++)
+        {
+            spawnCount += _spawnRate[i];
+
+            if (randomRate < spawnCount)
+            {
+                GameObject enemy = Instantiate(_enemyPrefabs[i]);
+                enemy.transform.position = transform.position;
+                return;
+            }
+        }
     }
 }
