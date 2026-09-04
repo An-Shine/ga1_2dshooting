@@ -12,11 +12,10 @@ public class ChaseEnemy : Enemy
 
     protected override void Move()
     {
-        // 1. 방향을 구한다
+        if (_player == null) return; // 방어 코드
+
         Vector2 direction = _player.transform.position - transform.position;
         direction.Normalize();
-
-        // 2. 방향과 속도에 맞게 이동
         transform.Translate(direction * _moveSpeed * Time.deltaTime);
     }
 }

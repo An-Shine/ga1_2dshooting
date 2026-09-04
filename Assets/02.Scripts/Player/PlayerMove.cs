@@ -38,8 +38,8 @@ public class PlayerMove : MonoBehaviour
         // 3. 방향과 속력에 따라 이동한다
         // 속도 : 방향 * 속력
 
-        Vector2 normalizedSpeed = (direction * speed).normalized; // 벡터의 길이를 1로 만들어주는것 -> 방향만 유지한다
-        transform.Translate(direction * speed * Time.deltaTime);
+        Vector2 normalizedDirection = direction.normalized;
+        transform.Translate(normalizedDirection * speed * Time.deltaTime);
 
         //deltaTime : 이전 프레임으로부터 지금 프레임까지 시간이 얼마나 지났는지 ms 단위로 반환
 
