@@ -14,6 +14,7 @@ public class EnemySpawner : MonoBehaviour
         if (_timer >= _spawnInterval)
         {
             _timer = 0;
+            _spawnInterval = UnityEngine.Random.Range(1f, 3f);
             Spawn();
         }
     }
