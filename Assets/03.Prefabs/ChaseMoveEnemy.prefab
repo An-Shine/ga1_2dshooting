@@ -108,6 +108,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ChaseMoveEnemy
   _health: 20
   _moveSpeed: 3
+  _collisionDamage: 10
 --- !u!50 &-5635208004093827584
 Rigidbody2D:
   serializedVersion: 5

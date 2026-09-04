@@ -108,6 +108,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StraightEnemy
   _health: 30
   _moveSpeed: 4
+  _collisionDamage: 10
 --- !u!50 &1651974507972656135
 Rigidbody2D:
   serializedVersion: 5
