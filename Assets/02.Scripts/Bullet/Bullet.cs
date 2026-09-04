@@ -5,6 +5,7 @@ public class Bullet : MonoBehaviour
 {
     public float MoveSpeed;
     public int Damage;
+    public bool Test = false;
 
     private void Update()
     {
