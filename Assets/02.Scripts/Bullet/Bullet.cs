@@ -3,14 +3,13 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float MoveSpeed;
-    public int Damage;
-    public bool Test = false;
+    [SerializeField] private float _moveSpeed;
+    [SerializeField] private int _damage;
 
     private void Update()
     {
         Vector2 direction = Vector2.up;
-        transform.Translate(direction * (MoveSpeed * Time.deltaTime));
+        transform.Translate(direction * (_moveSpeed * Time.deltaTime));
     }
 
     // 트리거 관련 이벤트
@@ -26,7 +25,7 @@ public class Bullet : MonoBehaviour
         {
             // GetComponent<타입>() -> 게임 오브젝트가 가지고 있는 컴포넌트를 참조
             Enemy enemy = collision.gameObject.GetComponent<Enemy>();
-            enemy.TakeDamage(Damage);
+            enemy.TakeDamage(_damage);
         }
     }
 }
