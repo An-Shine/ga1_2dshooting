@@ -106,14 +106,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ec2981e39762e24b8d30a5337a20892, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StraightEnemy
-  health: 10
+  _health: 0
   moveSpeed: 3
-  collisionDamage: 1
-  itemPrefabs:
+  _collisionDamage: 0
+  _itemPrefabs:
   - {fileID: 3286855680934766456, guid: bc3bae4181caa7d45b799893ea12a189, type: 3}
   - {fileID: 2372010313765720662, guid: f6ccb0efb2f44a54c8e19bad58667d4e, type: 3}
   - {fileID: 223148717703760377, guid: 5413495baea811943b4c69488452683e, type: 3}
-  itemSpawnRate: 30
+  _itemSpawnRate: 30
 --- !u!50 &1651974507972656135
 Rigidbody2D:
   serializedVersion: 5

@@ -106,14 +106,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82c437bc5ebce9f4f93bde11e4c92a36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ChaseMoveEnemy
-  health: 10
+  _health: 10
   moveSpeed: 3
-  collisionDamage: 1
-  itemPrefabs:
+  _collisionDamage: 5
+  _itemPrefabs:
   - {fileID: 3286855680934766456, guid: bc3bae4181caa7d45b799893ea12a189, type: 3}
-  - {fileID: 2372010313765720662, guid: f6ccb0efb2f44a54c8e19bad58667d4e, type: 3}
   - {fileID: 223148717703760377, guid: 5413495baea811943b4c69488452683e, type: 3}
-  itemSpawnRate: 30
+  - {fileID: 223148717703760377, guid: 5413495baea811943b4c69488452683e, type: 3}
+  _itemSpawnRate: 30
 --- !u!50 &-5635208004093827584
 Rigidbody2D:
   serializedVersion: 5

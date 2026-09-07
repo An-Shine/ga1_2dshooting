@@ -14,8 +14,8 @@ public class Item : MonoBehaviour
     [SerializeField]
     private float _value;
     [SerializeField]
-    private float _chaseInterval;
-    private float _timer;
+    private float _chaseInterval = 2f;
+    private float _waitTimer;
 
     [SerializeField]
     protected float _moveSpeed;
@@ -29,17 +29,16 @@ public class Item : MonoBehaviour
 
     private void Update()
     {
-        ChasePlayer();
+        _waitTimer += Time.deltaTime;
+        if (_waitTimer >= _chaseInterval)
+        {
+            ChasePlayer();
+        }
     }
 
     private void ChasePlayer()
     {
-        _timer += Time.deltaTime;
-        if (_timer >= _chaseInterval)
-        {
-            _timer = 0;
-        }
-
+        Player player = GameObject.FindWithTag("Player").GetComponent<Player>();
         Vector2 direction = _player.transform.position - transform.position;
         direction.Normalize();
         transform.Translate(direction * _moveSpeed * Time.deltaTime);

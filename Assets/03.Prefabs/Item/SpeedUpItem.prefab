@@ -105,10 +105,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc5808ff613e7c343823c2c08fa6a165, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Item
-  type: 1
-  value: 1
-  chaseInterval: 1
-  moveSpeed: 5
+  _type: 1
+  _value: 1
+  _chaseInterval: 1
+  _moveSpeed: 5
 --- !u!60 &329618203487082221
 PolygonCollider2D:
   m_ObjectHideFlags: 0
