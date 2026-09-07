@@ -25,6 +25,10 @@ public class EnemySpawner : MonoBehaviour
         int randomRate = Random.Range(0, 100);
         int spawnCount = 0;
 
+        // TODO : Scriptable Object 를 사용해서 리팩토링
+        // 1. 배열을 사용했지만 각 아이템이 어떤 프리펩인지 알수가없음
+        // 2. 각 에너미 스폰 확률을 매직넘버로 하드코딩해서 유지보수가 어려움
+
         for (int i = 0; i < _enemyPrefabs.Length; i++)
         {
             spawnCount += _spawnRate[i];

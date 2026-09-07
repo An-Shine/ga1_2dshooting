@@ -84,4 +84,15 @@ public class PlayerMove : MonoBehaviour
             speed += speedCount;
         }
     }
+
+    public void SpeedUp(float upValue)
+    {
+        if (upValue < 0)
+        {
+            Debug.LogWarning("속도 증가량은 음수일 수 없다");
+            return;
+        }
+
+        speed += upValue;
+    }
 }

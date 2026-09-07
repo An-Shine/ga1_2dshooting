@@ -15,6 +15,7 @@ public class ChaseMoveEnemy : Enemy
             return;
         }
 
+        // 1. Player의 Transform 위치 확인
         _direction = _player.transform.position - transform.position;
         _direction.Normalize();
     }
@@ -23,6 +24,6 @@ public class ChaseMoveEnemy : Enemy
     protected override void Move()
     {
         // 2. 방향과 속도에 맞게 이동
-        transform.Translate(_direction * _moveSpeed * Time.deltaTime);
+        transform.Translate(_direction * moveSpeed * Time.deltaTime);
     }
 }

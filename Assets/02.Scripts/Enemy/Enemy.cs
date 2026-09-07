@@ -2,9 +2,18 @@ using UnityEngine;
 
 public abstract class Enemy : MonoBehaviour
 {
-    [SerializeField] private int _health;
-    [SerializeField] protected float _moveSpeed;
-    [SerializeField] private int _collisionDamage;
+    [SerializeField]
+    private int _health;
+    [SerializeField]
+    protected float moveSpeed;
+    [SerializeField]
+    private int _collisionDamage;
+
+    [Header("스폰할 아이템 프리펩")]
+    [SerializeField]
+    private GameObject[] _itemPrefabs;
+
+    [SerializeField] private float _itemSpawnRate;
 
 
     private void Update()
@@ -22,6 +31,7 @@ public abstract class Enemy : MonoBehaviour
         {
             // 충돌한 대상 파괴 (Enemy)
             Destroy(gameObject);
+            DropItems();
         }
     }
 
@@ -34,5 +44,19 @@ public abstract class Enemy : MonoBehaviour
         player.TakeDamage(_collisionDamage);
 
         Destroy(gameObject);
+    }
+
+    private void DropItems()
+    {
+        for (int i = 0; i < _itemPrefabs.Length; i++)
+        {
+            if (Random.value < 0.3f)
+            {
+                int randomIndex = Random.Range(0, _itemPrefabs.Length);
+                GameObject item = Instantiate(_itemPrefabs[randomIndex]);
+                item.transform.position = transform.position;
+                return;
+            }
+        }
     }
 }
