@@ -13,10 +13,6 @@ public class Item : MonoBehaviour
     private ItemType _type;
     [SerializeField]
     private float _value;
-
-    public ItemType Type => _type;
-    public float Value => _value;
-
     [SerializeField]
     private float _chaseInterval;
     private float _timer;
@@ -61,18 +57,18 @@ public class Item : MonoBehaviour
             return;
         }
 
-        switch (Type)
+        switch (_type)
         {
             case ItemType.Heal:
-                player.Heal((int)(Value));
+                player.Heal((int)(_value));
                 break;
 
             case ItemType.SpeedUp:
-                player.GetComponent<PlayerMove>().SpeedUp(Value);
+                player.GetComponent<PlayerMove>().SpeedUp(_value);
                 break;
             // TODO : 속성을 직접 수정하는게 아니라 메서드를 통해 수정
             case ItemType.FireRateUp:
-                player.GetComponent<PlayerFire>().FireCooldown -= Value;
+                player.GetComponent<PlayerFire>().FireCooldown -= _value;
                 break;
         }
 
