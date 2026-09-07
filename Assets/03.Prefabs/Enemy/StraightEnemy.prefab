@@ -106,9 +106,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ec2981e39762e24b8d30a5337a20892, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StraightEnemy
-  _health: 0
+  _health: 10
   moveSpeed: 3
-  _collisionDamage: 0
+  _collisionDamage: 5
   _itemPrefabs:
   - {fileID: 3286855680934766456, guid: bc3bae4181caa7d45b799893ea12a189, type: 3}
   - {fileID: 2372010313765720662, guid: f6ccb0efb2f44a54c8e19bad58667d4e, type: 3}

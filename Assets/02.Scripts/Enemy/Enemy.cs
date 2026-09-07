@@ -48,7 +48,7 @@ public abstract class Enemy : MonoBehaviour
     }
     private void SpawnItem()
     {
-        if (Random.Range(0, 100) > 30)
+        if (Random.Range(0, 100) > _itemSpawnRate)
         {
             Instantiate(_itemPrefabs[Random.Range(0, _itemPrefabs.Length)], transform.position, transform.rotation);
         }
