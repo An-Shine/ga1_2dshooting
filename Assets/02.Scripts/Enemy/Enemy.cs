@@ -13,7 +13,8 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField]
     private GameObject[] _itemPrefabs;
 
-    [SerializeField] private float _itemSpawnRate;
+    [SerializeField]
+    private float _itemSpawnRate;
 
 
     private void Update()
@@ -31,7 +32,7 @@ public abstract class Enemy : MonoBehaviour
         {
             // 충돌한 대상 파괴 (Enemy)
             Destroy(gameObject);
-            DropItems();
+            SpawnItem();
         }
     }
 
@@ -45,18 +46,11 @@ public abstract class Enemy : MonoBehaviour
 
         Destroy(gameObject);
     }
-
-    private void DropItems()
+    private void SpawnItem()
     {
-        for (int i = 0; i < _itemPrefabs.Length; i++)
+        if (Random.Range(0, 100) > 30)
         {
-            if (Random.value < 0.3f)
-            {
-                int randomIndex = Random.Range(0, _itemPrefabs.Length);
-                GameObject item = Instantiate(_itemPrefabs[randomIndex]);
-                item.transform.position = transform.position;
-                return;
-            }
+            Instantiate(_itemPrefabs[Random.Range(0, _itemPrefabs.Length)], transform.position, transform.rotation);
         }
     }
 }

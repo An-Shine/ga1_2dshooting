@@ -38,7 +38,6 @@ public class Item : MonoBehaviour
 
     private void ChasePlayer()
     {
-        Player player = GameObject.FindWithTag("Player").GetComponent<Player>();
         Vector2 direction = _player.transform.position - transform.position;
         direction.Normalize();
         transform.Translate(direction * _moveSpeed * Time.deltaTime);
