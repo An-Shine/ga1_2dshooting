@@ -70,7 +70,7 @@ public class Item : MonoBehaviour
             case ItemType.SpeedUp:
                 player.GetComponent<PlayerMove>().SpeedUp(Value);
                 break;
-
+            // TODO : 속성을 직접 수정하는게 아니라 메서드를 통해 수정
             case ItemType.FireRateUp:
                 player.GetComponent<PlayerFire>().FireCooldown -= Value;
                 break;
