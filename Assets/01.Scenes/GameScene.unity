@@ -1139,7 +1139,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d45900a8995ef9f4b9bbbe0925c40c67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMove
-  speed: 5
+  _speed: 4
   limitTopY: -0.6
   limitBottomY: -4.5
   limitX: 3
@@ -1165,7 +1165,7 @@ MonoBehaviour:
   SubFirePoints:
   - {fileID: 772585178}
   - {fileID: 1326995615}
-  FireCooldown: 1
+  _fireCooldown: 1
   CurrentCooldown: 0
   isAutoFire: 0
 --- !u!50 &1057203618
@@ -1257,8 +1257,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca63723f8f5b84944a1a2b55821b8db8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
-  _maxHealth: 0
-  _currentHealth: 0
+  _health: 100
 --- !u!95 &1057203621
 Animator:
   serializedVersion: 7
