@@ -107,7 +107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 693f01feb42f25b448a9cd598461075d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ChaseEnemy
-  _health: 10
+  _health: 100
   moveSpeed: 3
   _collisionDamage: 5
   _itemPrefabs:
@@ -176,7 +176,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.00661242, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -186,7 +186,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.41810572, y: 0.43133068}
   m_EdgeRadius: 0
 --- !u!95 &6821637854430326475
 Animator:
@@ -198,7 +198,7 @@ Animator:
   m_GameObject: {fileID: 3776236897520372510}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ce9677e8cf728804e879558317e3ebab, type: 2}
+  m_Controller: {fileID: 9100000, guid: 20c960aa930190645bea5c4b3e5d98e3, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

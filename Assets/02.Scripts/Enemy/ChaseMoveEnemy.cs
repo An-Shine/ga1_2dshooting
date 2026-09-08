@@ -4,6 +4,7 @@ public class ChaseMoveEnemy : Enemy
 {
     private GameObject _player;
     private Vector2 _direction;
+    private Vector2 _rotation;
 
     private void Start()
     {

@@ -16,6 +16,12 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField]
     private float _itemSpawnRate;
 
+    private Animator _animator;
+    private void Awake()
+    {
+        _animator = GetComponent<Animator>();
+    }
+
 
     private void Update()
     {
@@ -28,6 +34,9 @@ public abstract class Enemy : MonoBehaviour
     public void TakeDamage(int damage)
     {
         _health -= damage;
+
+        _animator.SetTrigger("Hit");
+
         if (_health <= 0)
         {
             // 충돌한 대상 파괴 (Enemy)
@@ -46,6 +55,7 @@ public abstract class Enemy : MonoBehaviour
 
         Destroy(gameObject);
     }
+
     private void SpawnItem()
     {
         if (Random.Range(0, 100) > _itemSpawnRate)

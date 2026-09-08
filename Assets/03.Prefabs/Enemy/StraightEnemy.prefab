@@ -107,7 +107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ec2981e39762e24b8d30a5337a20892, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StraightEnemy
-  _health: 10
+  _health: 100
   moveSpeed: 3
   _collisionDamage: 5
   _itemPrefabs:
@@ -198,7 +198,7 @@ Animator:
   m_GameObject: {fileID: 3788389747146914657}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 662ff5f9a8824f14a8bb7bd873847c23, type: 2}
+  m_Controller: {fileID: 9100000, guid: 7ff6909b866fdc94789f696eee10cabe, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
