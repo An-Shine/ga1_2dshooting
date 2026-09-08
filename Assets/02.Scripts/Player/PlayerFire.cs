@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class PlayerFire : MonoBehaviour
@@ -14,14 +14,18 @@ public class PlayerFire : MonoBehaviour
     //public Transform LeftFirePoint;
     //public Transform RightFirePoint;
 
-    public float FireCooldown = 2.0f;
+    [SerializeField]
+    private float _fireCooldown = 1.0f;
+
+    public float FireCooldown => _fireCooldown;
+    private const float MinCoolTime = 0.06f;
     public float CurrentCooldown;
 
     public bool isAutoFire = false;
 
     private void Start()
     {
-        CurrentCooldown = FireCooldown;
+        CurrentCooldown = _fireCooldown;
     }
 
     private void Update()
@@ -34,7 +38,7 @@ public class PlayerFire : MonoBehaviour
             Fire();
 
             // 쿨타이머 초기화 (중요)
-            CurrentCooldown = FireCooldown;
+            CurrentCooldown = _fireCooldown;
         }
 
 
@@ -92,5 +96,16 @@ public class PlayerFire : MonoBehaviour
         }
 
         CurrentCooldown = FireCooldown;
+    }
+    public void FireRateUp(float upValue)
+    {
+        if (upValue < 0)
+        {
+            Debug.LogWarning("공격 속도 증가량은 0보다 작을 수 없습니다.");
+            return;
+        }
+
+        // 최고 속도 제한
+        _fireCooldown = Math.Max(_fireCooldown - upValue, MinCoolTime);
     }
 }

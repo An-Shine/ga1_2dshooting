@@ -5,7 +5,9 @@ public class PlayerMove : MonoBehaviour
     // 목적 : 키보드 입력에 따라서 플레이어 이동 처리를 하고싶다
 
     // 매직넘버 방지 : 보는사람에 따라 의미가 달라질 수 있는 숫자 값을 매직넘버 라고함
-    public float speed;
+    [SerializeField]
+    private float _speed;
+    public float Speed => _speed;
     public float limitTopY = -0.6f;
     public float limitBottomY = -4.5f;
     public float limitX = 3.0f;
@@ -25,6 +27,10 @@ public class PlayerMove : MonoBehaviour
         Move();
         SpeedChange();
     }
+    public float GetSpeed()
+    {
+        return _speed;
+    }
 
     private void Move()
     {
@@ -43,7 +49,7 @@ public class PlayerMove : MonoBehaviour
         // 속도 : 방향 * 속력
         Vector2 normalizedDirection = direction.normalized;
         _animator.SetInteger("x", (int)normalizedDirection.x);
-        transform.Translate(normalizedDirection * speed * Time.deltaTime);
+        transform.Translate(normalizedDirection * _speed * Time.deltaTime);
 
         //deltaTime : 이전 프레임으로부터 지금 프레임까지 시간이 얼마나 지났는지 ms 단위로 반환
 
@@ -76,16 +82,16 @@ public class PlayerMove : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            speed -= speedCount;
-            if (speed <= speedLimit)
+            _speed -= speedCount;
+            if (_speed <= speedLimit)
             {
-                speed = speedLimit; // 더이상 떨어지지 않게끔 , 하지만 기획의도에 따라 0으로 가게끔 수정가능
+                _speed = speedLimit; // 더이상 떨어지지 않게끔 , 하지만 기획의도에 따라 0으로 가게끔 수정가능
             }
         }
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            speed += speedCount;
+            _speed += speedCount;
         }
     }
 
@@ -97,6 +103,6 @@ public class PlayerMove : MonoBehaviour
             return;
         }
 
-        speed += upValue;
+        _speed += upValue;
     }
 }

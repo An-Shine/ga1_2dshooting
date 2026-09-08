@@ -59,14 +59,19 @@ public class Item : MonoBehaviour
         {
             case ItemType.Heal:
                 player.Heal((int)(_value));
+                Debug.Log($"플레이어 체력: {player.Health})");
                 break;
 
             case ItemType.SpeedUp:
-                player.GetComponent<PlayerMove>().SpeedUp(_value);
+                PlayerMove playerMove = player.GetComponent<PlayerMove>();
+                playerMove.SpeedUp(_value);
+                Debug.Log($"플레이어 이동속도: {playerMove.Speed}");
                 break;
             // TODO : 속성을 직접 수정하는게 아니라 메서드를 통해 수정
             case ItemType.FireRateUp:
-                player.GetComponent<PlayerFire>().FireCooldown -= _value;
+                PlayerFire playerFire = player.GetComponent<PlayerFire>();
+                playerFire.FireRateUp(_value);
+                Debug.Log($"플레이어 공격속도: {playerFire.FireCooldown}");
                 break;
         }
 
