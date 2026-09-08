@@ -115,6 +115,7 @@ MonoBehaviour:
   - {fileID: 2372010313765720662, guid: f6ccb0efb2f44a54c8e19bad58667d4e, type: 3}
   - {fileID: 223148717703760377, guid: 5413495baea811943b4c69488452683e, type: 3}
   _itemSpawnRate: 30
+  _deathEffectPrefab: {fileID: 8194992990867289339, guid: 99bc28c0d45f51c4fbac01080b73edc7, type: 3}
 --- !u!50 &6724859361707204750
 Rigidbody2D:
   serializedVersion: 5

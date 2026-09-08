@@ -2,22 +2,23 @@ using UnityEngine;
 
 public abstract class Enemy : MonoBehaviour
 {
-    [SerializeField]
-    private int _health;
-    [SerializeField]
-    protected float moveSpeed;
-    [SerializeField]
-    private int _collisionDamage;
+    [SerializeField] private int _health;
+    [SerializeField] protected float moveSpeed;
+    [SerializeField] private int _collisionDamage;
 
     [Header("스폰할 아이템 프리펩")]
     [SerializeField]
     private GameObject[] _itemPrefabs;
 
+    [SerializeField] private float _itemSpawnRate;
+
+    [Header("죽을때 폭발이펙트 프리펩")]
     [SerializeField]
-    private float _itemSpawnRate;
+    private GameObject _deathEffectPrefab;
 
     private Animator _animator;
     private static readonly int HitHash = Animator.StringToHash("Hit");
+
     private void Awake()
     {
         _animator = GetComponent<Animator>();
@@ -41,6 +42,7 @@ public abstract class Enemy : MonoBehaviour
         if (_health <= 0)
         {
             // 충돌한 대상 파괴 (Enemy)
+            SpawnDeathEffect();
             Destroy(gameObject);
             SpawnItem();
         }
@@ -53,7 +55,6 @@ public abstract class Enemy : MonoBehaviour
         Player player = collision.gameObject.GetComponent<Player>();
 
         player.TakeDamage(_collisionDamage);
-
         Destroy(gameObject);
     }
 
@@ -63,5 +64,10 @@ public abstract class Enemy : MonoBehaviour
         {
             Instantiate(_itemPrefabs[Random.Range(0, _itemPrefabs.Length)], transform.position, transform.rotation);
         }
+    }
+
+    private void SpawnDeathEffect()
+    {
+        Instantiate(_deathEffectPrefab, transform.position, Quaternion.identity);
     }
 }
