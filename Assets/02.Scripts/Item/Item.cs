@@ -21,6 +21,8 @@ public class Item : MonoBehaviour
     protected float _moveSpeed;
     private GameObject _player;
     private Vector2 _direction;
+    [SerializeField]
+    private GameObject[] _itemEffectPrefabs;
 
     private void Start()
     {
@@ -59,22 +61,24 @@ public class Item : MonoBehaviour
         {
             case ItemType.Heal:
                 player.Heal((int)(_value));
+                Instantiate(_itemEffectPrefabs[0], transform.position, Quaternion.identity);
                 Debug.Log($"플레이어 체력: {player.Health})");
                 break;
 
             case ItemType.SpeedUp:
                 PlayerMove playerMove = player.GetComponent<PlayerMove>();
                 playerMove.SpeedUp(_value);
+                Instantiate(_itemEffectPrefabs[1], transform.position, Quaternion.identity);
                 Debug.Log($"플레이어 이동속도: {playerMove.Speed}");
                 break;
             // TODO : 속성을 직접 수정하는게 아니라 메서드를 통해 수정
             case ItemType.FireRateUp:
                 PlayerFire playerFire = player.GetComponent<PlayerFire>();
                 playerFire.FireRateUp(_value);
+                Instantiate(_itemEffectPrefabs[2], transform.position, Quaternion.identity);
                 Debug.Log($"플레이어 공격속도: {playerFire.FireCooldown}");
                 break;
         }
-
         Destroy(gameObject);
     }
 }
