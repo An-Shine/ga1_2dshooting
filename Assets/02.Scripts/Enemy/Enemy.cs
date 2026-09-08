@@ -17,6 +17,7 @@ public abstract class Enemy : MonoBehaviour
     private float _itemSpawnRate;
 
     private Animator _animator;
+    private static readonly int HitHash = Animator.StringToHash("Hit");
     private void Awake()
     {
         _animator = GetComponent<Animator>();
@@ -35,7 +36,7 @@ public abstract class Enemy : MonoBehaviour
     {
         _health -= damage;
 
-        _animator.SetTrigger("Hit");
+        _animator.SetTrigger(HitHash);
 
         if (_health <= 0)
         {
@@ -58,7 +59,7 @@ public abstract class Enemy : MonoBehaviour
 
     private void SpawnItem()
     {
-        if (Random.Range(0, 100) > _itemSpawnRate)
+        if (Random.Range(0, 100) < _itemSpawnRate)
         {
             Instantiate(_itemPrefabs[Random.Range(0, _itemPrefabs.Length)], transform.position, transform.rotation);
         }
