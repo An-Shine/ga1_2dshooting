@@ -67,7 +67,7 @@ public class PlayerFire : MonoBehaviour
             GameObject rightBullet = Instantiate(BulletPrefab);
             rightBullet.transform.position = RightFirePoint.position;
             */
-            FireSprite.SetActive(true);
+            _fireSprite.SetActive(true);
 
             foreach (Transform firePoint in FirePoints)
             {
@@ -85,7 +85,7 @@ public class PlayerFire : MonoBehaviour
 
     private void AutoFire()
     {
-        FireSprite.SetActive(true);
+        _fireSprite.SetActive(true);
         foreach (Transform firePoint in FirePoints)
         {
             GameObject bullet = Instantiate(BulletPrefab);
