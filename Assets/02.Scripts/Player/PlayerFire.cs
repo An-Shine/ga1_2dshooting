@@ -57,6 +57,7 @@ public class PlayerFire : MonoBehaviour
 
     private void Fire()
     {
+        _fireSprite.SetActive(true);
         // 1. 스페이스바를 누르면 
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -67,8 +68,6 @@ public class PlayerFire : MonoBehaviour
             GameObject rightBullet = Instantiate(BulletPrefab);
             rightBullet.transform.position = RightFirePoint.position;
             */
-            _fireSprite.SetActive(true);
-
             foreach (Transform firePoint in FirePoints)
             {
                 GameObject bullet = Instantiate(BulletPrefab);
