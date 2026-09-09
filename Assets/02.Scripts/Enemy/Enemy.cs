@@ -7,21 +7,23 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] private int _collisionDamage;
 
     [Header("스폰할 아이템 프리펩")]
-    [SerializeField]
-    private GameObject[] _itemPrefabs;
+    [SerializeField] private GameObject[] _itemPrefabs;
 
     [SerializeField] private float _itemSpawnRate;
 
     [Header("죽을때 폭발이펙트 프리펩")]
-    [SerializeField]
-    private GameObject _deathEffectPrefab;
+    [SerializeField] private GameObject _deathEffectPrefab;
 
     private Animator _animator;
     private static readonly int HitHash = Animator.StringToHash("Hit");
 
+    // Todo : Enemy 가 공격당할때 재생시켜줄 피격 사운드
+    private EnemySound _enemySound;
+
     private void Awake()
     {
         _animator = GetComponent<Animator>();
+        _enemySound = GetComponent<EnemySound>();
     }
 
 
@@ -37,11 +39,14 @@ public abstract class Enemy : MonoBehaviour
     {
         _health -= damage;
 
+        _enemySound.PlayDamagedSound();
+
         _animator.SetTrigger(HitHash);
 
         if (_health <= 0)
         {
             // 충돌한 대상 파괴 (Enemy)
+            _enemySound.PlayDieSound();
             SpawnDeathEffect();
             Destroy(gameObject);
             SpawnItem();

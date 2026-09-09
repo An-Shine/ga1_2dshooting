@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -10,6 +11,7 @@ public class Player : MonoBehaviour
     private PlayerEffect _playerEffect;
     private Animator _animator;
     private static readonly int IsDieHash = Animator.StringToHash("IsDie");
+    private PlayerSound _playerSound;
 
 
     public int Health => _health; // 람다식 문법을 활용한 읽기 전용 프로퍼티
@@ -22,6 +24,7 @@ public class Player : MonoBehaviour
     {
         _playerEffect = GetComponent<PlayerEffect>();
         _animator = GetComponent<Animator>();
+        _playerSound = GetComponent<PlayerSound>();
     }
 
     public void TakeDamage(int damage)
@@ -32,6 +35,7 @@ public class Player : MonoBehaviour
             return;
         }
 
+        _playerSound.PlayDamagedSound();
         _health -= damage;
         if (_health <= 0f)
         {
@@ -46,6 +50,8 @@ public class Player : MonoBehaviour
 
         // 사망 이펙트
         // _playerEffect.SpawnDeathEffect();
+
+        _playerSound.PlayDieSound();
     }
 
     public void OnDeathAnimationEnd()
@@ -65,6 +71,14 @@ public class Player : MonoBehaviour
         if (_health > _maxHealth)
         {
             _health = _maxHealth;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Item"))
+        {
+            _playerSound.PlayItemGetSound();
         }
     }
 }

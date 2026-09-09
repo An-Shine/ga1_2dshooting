@@ -19,6 +19,7 @@ public class Item : MonoBehaviour
     private Vector2 _direction;
     [SerializeField] private GameObject[] _itemEffectPrefabs;
 
+
     private void Start()
     {
         _player = GameObject.FindWithTag("Player");
@@ -64,6 +65,7 @@ public class Item : MonoBehaviour
                 Instantiate(_itemEffectPrefabs[1], transform.position, Quaternion.identity);
                 PlayerMove playerMove = player.GetComponent<PlayerMove>();
                 playerMove.SpeedUp(_value);
+
                 Debug.Log($"플레이어 이동속도: {playerMove.Speed}");
                 break;
             // TODO : 속성을 직접 수정하는게 아니라 메서드를 통해 수정
@@ -71,6 +73,7 @@ public class Item : MonoBehaviour
                 Instantiate(_itemEffectPrefabs[2], transform.position, Quaternion.identity);
                 PlayerFire playerFire = player.GetComponent<PlayerFire>();
                 playerFire.FireRateUp(_value);
+
                 Debug.Log($"플레이어 공격속도: {playerFire.FireCooldown}");
                 break;
         }
