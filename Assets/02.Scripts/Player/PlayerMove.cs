@@ -5,8 +5,7 @@ public class PlayerMove : MonoBehaviour
     // 목적 : 키보드 입력에 따라서 플레이어 이동 처리를 하고싶다
 
     // 매직넘버 방지 : 보는사람에 따라 의미가 달라질 수 있는 숫자 값을 매직넘버 라고함
-    [SerializeField]
-    private float _speed;
+    [SerializeField] private float _speed;
     public float Speed => _speed;
     public float limitTopY = -0.6f;
     public float limitBottomY = -4.5f;
@@ -14,6 +13,7 @@ public class PlayerMove : MonoBehaviour
     public float speedCount = 1.0f;
     public float speedLimit = 1.0f;
     private Animator _animator;
+    [SerializeField] private GameObject _trail;
 
     private void Awake()
     {
@@ -27,6 +27,7 @@ public class PlayerMove : MonoBehaviour
         Move();
         SpeedChange();
     }
+
     public float GetSpeed()
     {
         return _speed;
@@ -71,10 +72,18 @@ public class PlayerMove : MonoBehaviour
         {
             transform.position = new Vector2(-limitX, transform.position.y);
         }
-
         else if (transform.position.x < -limitX)
         {
             transform.position = new Vector2(limitX, transform.position.y);
+        }
+
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            _trail.SetActive(false);
+        }
+        else if (Input.GetKeyUp(KeyCode.DownArrow))
+        {
+            _trail.SetActive(true);
         }
     }
 

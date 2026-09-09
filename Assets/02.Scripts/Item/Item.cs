@@ -9,20 +9,15 @@ public class Item : MonoBehaviour
         FireRateUp
     }
 
-    [SerializeField]
-    private ItemType _type;
-    [SerializeField]
-    private float _value;
-    [SerializeField]
-    private float _chaseInterval = 2f;
+    [SerializeField] private ItemType _type;
+    [SerializeField] private float _value;
+    [SerializeField] private float _chaseInterval = 2f;
     private float _waitTimer;
 
-    [SerializeField]
-    protected float _moveSpeed;
+    [SerializeField] protected float _moveSpeed;
     private GameObject _player;
     private Vector2 _direction;
-    [SerializeField]
-    private GameObject[] _itemEffectPrefabs;
+    [SerializeField] private GameObject[] _itemEffectPrefabs;
 
     private void Start()
     {
@@ -60,25 +55,26 @@ public class Item : MonoBehaviour
         switch (_type)
         {
             case ItemType.Heal:
-                player.Heal((int)(_value));
                 Instantiate(_itemEffectPrefabs[0], transform.position, Quaternion.identity);
+                player.Heal((int)(_value));
                 Debug.Log($"플레이어 체력: {player.Health})");
                 break;
 
             case ItemType.SpeedUp:
+                Instantiate(_itemEffectPrefabs[1], transform.position, Quaternion.identity);
                 PlayerMove playerMove = player.GetComponent<PlayerMove>();
                 playerMove.SpeedUp(_value);
-                Instantiate(_itemEffectPrefabs[1], transform.position, Quaternion.identity);
                 Debug.Log($"플레이어 이동속도: {playerMove.Speed}");
                 break;
             // TODO : 속성을 직접 수정하는게 아니라 메서드를 통해 수정
             case ItemType.FireRateUp:
+                Instantiate(_itemEffectPrefabs[2], transform.position, Quaternion.identity);
                 PlayerFire playerFire = player.GetComponent<PlayerFire>();
                 playerFire.FireRateUp(_value);
-                Instantiate(_itemEffectPrefabs[2], transform.position, Quaternion.identity);
                 Debug.Log($"플레이어 공격속도: {playerFire.FireCooldown}");
                 break;
         }
+
         Destroy(gameObject);
     }
 }

@@ -10,6 +10,10 @@ public class Bullet : MonoBehaviour
     {
         Vector2 direction = Vector2.up;
         transform.Translate(direction * (_moveSpeed * Time.deltaTime));
+        if (transform.position.y > 5)
+        {
+            Destroy(gameObject);
+        }
     }
 
     // 트리거 관련 이벤트

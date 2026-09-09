@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
     // 메서드를 통한 상태변경
     // 데이터 은닉
     [SerializeField] private int _health = 100;
+    [SerializeField] private int _maxHealth = 100;
     private PlayerEffect _playerEffect;
 
     public int Health => _health; // 람다식 문법을 활용한 읽기 전용 프로퍼티
@@ -44,5 +45,9 @@ public class Player : MonoBehaviour
         }
 
         _health += healAmount;
+        if (_health > _maxHealth)
+        {
+            _health = _maxHealth;
+        }
     }
 }
