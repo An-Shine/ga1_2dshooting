@@ -11,11 +11,12 @@ public class PlayerFire : MonoBehaviour
     public Transform[] FirePoints;
 
     public Transform[] SubFirePoints;
+
     //public Transform LeftFirePoint;
     //public Transform RightFirePoint;
+    [SerializeField] private GameObject _fireSprite;
 
-    [SerializeField]
-    private float _fireCooldown = 1.0f;
+    [SerializeField] private float _fireCooldown = 1.0f;
 
     public float FireCooldown => _fireCooldown;
     private const float MinCoolTime = 0.06f;
@@ -66,6 +67,7 @@ public class PlayerFire : MonoBehaviour
             GameObject rightBullet = Instantiate(BulletPrefab);
             rightBullet.transform.position = RightFirePoint.position;
             */
+            FireSprite.SetActive(true);
 
             foreach (Transform firePoint in FirePoints)
             {
@@ -83,6 +85,7 @@ public class PlayerFire : MonoBehaviour
 
     private void AutoFire()
     {
+        FireSprite.SetActive(true);
         foreach (Transform firePoint in FirePoints)
         {
             GameObject bullet = Instantiate(BulletPrefab);
@@ -97,6 +100,7 @@ public class PlayerFire : MonoBehaviour
 
         CurrentCooldown = FireCooldown;
     }
+
     public void FireRateUp(float upValue)
     {
         if (upValue < 0)

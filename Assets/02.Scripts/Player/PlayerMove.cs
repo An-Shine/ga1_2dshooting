@@ -17,7 +17,8 @@ public class PlayerMove : MonoBehaviour
 
     private void Awake()
     {
-        _animator = GetComponent<Animator>();
+        // _animator = GetComponent<Animator>();
+        // 새 player 스프리이트는 좌우 움직일때 애니메이션 없음
     }
 
     // 매 프레임마다 실행된다
@@ -49,7 +50,7 @@ public class PlayerMove : MonoBehaviour
         // 3. 방향과 속력에 따라 이동한다
         // 속도 : 방향 * 속력
         Vector2 normalizedDirection = direction.normalized;
-        _animator.SetInteger("x", (int)normalizedDirection.x);
+        //_animator.SetInteger("x", (int)normalizedDirection.x);
         transform.Translate(normalizedDirection * _speed * Time.deltaTime);
 
         //deltaTime : 이전 프레임으로부터 지금 프레임까지 시간이 얼마나 지났는지 ms 단위로 반환

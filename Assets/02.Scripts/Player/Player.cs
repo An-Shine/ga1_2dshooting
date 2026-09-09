@@ -8,6 +8,9 @@ public class Player : MonoBehaviour
     [SerializeField] private int _health = 100;
     [SerializeField] private int _maxHealth = 100;
     private PlayerEffect _playerEffect;
+    private Animator _animator;
+    private static readonly int IsDieHash = Animator.StringToHash("IsDie");
+
 
     public int Health => _health; // 람다식 문법을 활용한 읽기 전용 프로퍼티
 
@@ -18,6 +21,7 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         _playerEffect = GetComponent<PlayerEffect>();
+        _animator = GetComponent<Animator>();
     }
 
     public void TakeDamage(int damage)
@@ -31,9 +35,22 @@ public class Player : MonoBehaviour
         _health -= damage;
         if (_health <= 0f)
         {
-            _playerEffect.SpawnDeathEffect();
-            Destroy(gameObject);
+            Die();
         }
+    }
+
+    private void Die()
+    {
+        // 죽음 애니메이션 재생
+        _animator.SetTrigger(IsDieHash);
+
+        // 사망 이펙트
+        // _playerEffect.SpawnDeathEffect();
+    }
+
+    public void OnDeathAnimationEnd()
+    {
+        Time.timeScale = 0f;
     }
 
     public void Heal(int healAmount)
