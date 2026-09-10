@@ -62,12 +62,13 @@ public class Item : MonoBehaviour
                 break;
 
             case ItemType.SpeedUp:
-                Instantiate(_itemEffectPrefabs[1], transform.position, Quaternion.identity);
-                PlayerMove playerMove = player.GetComponent<PlayerMove>();
-                playerMove.SpeedUp(_value);
-
-                Debug.Log($"플레이어 이동속도: {playerMove.Speed}");
                 break;
+            /*
+            Instantiate(_itemEffectPrefabs[1], transform.position, Quaternion.identity);
+            PlayerMove playerMove = player.GetComponent<PlayerMove>();
+            playerMove.SpeedUp(_value);
+            Debug.Log($"플레이어 이동속도: {playerMove.Speed}");
+            */
             // TODO : 속성을 직접 수정하는게 아니라 메서드를 통해 수정
             case ItemType.FireRateUp:
                 Instantiate(_itemEffectPrefabs[2], transform.position, Quaternion.identity);

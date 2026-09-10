@@ -6,6 +6,15 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float _moveSpeed;
     [SerializeField] private int _damage;
 
+    private AudioSource _audioSource;
+
+    private void Awake()
+    {
+        _audioSource = GetComponent<AudioSource>();
+        _audioSource.pitch = UnityEngine.Random.Range(1f, 3f);
+        _audioSource.Play();
+    }
+
     private void Update()
     {
         Vector2 direction = Vector2.up;

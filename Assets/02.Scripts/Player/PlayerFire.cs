@@ -82,7 +82,7 @@ public class PlayerFire : MonoBehaviour
         }
     }
 
-    private void AutoFire()
+    public void AutoFire()
     {
         _fireSprite.SetActive(true);
         foreach (Transform firePoint in FirePoints)
