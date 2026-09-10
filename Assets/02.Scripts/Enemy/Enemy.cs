@@ -48,6 +48,9 @@ public abstract class Enemy : MonoBehaviour
             // 충돌한 대상 파괴 (Enemy)
             _enemySound.PlayDieSound();
             SpawnDeathEffect();
+
+            ScoreManager scoreManager = FindAnyObjectByType<ScoreManager>();
+            scoreManager.AddScore(100);
             Destroy(gameObject);
             SpawnItem();
         }
