@@ -112,11 +112,7 @@ MonoBehaviour:
   _health: 40
   moveSpeed: 3
   _collisionDamage: 5
-  _itemPrefabs:
-  - {fileID: 3286855680934766456, guid: bc3bae4181caa7d45b799893ea12a189, type: 3}
-  - {fileID: 2372010313765720662, guid: f6ccb0efb2f44a54c8e19bad58667d4e, type: 3}
-  - {fileID: 223148717703760377, guid: 5413495baea811943b4c69488452683e, type: 3}
-  _itemSpawnRate: 30
+  _itemSpawnDataTable: {fileID: 11400000, guid: c69e0209c97bef84fac4dc88fb0299b5, type: 2}
   _deathEffectPrefab: {fileID: 8194992990867289339, guid: 99bc28c0d45f51c4fbac01080b73edc7, type: 3}
 --- !u!50 &6724859361707204750
 Rigidbody2D:
