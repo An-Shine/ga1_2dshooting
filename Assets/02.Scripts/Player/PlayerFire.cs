@@ -42,7 +42,6 @@ public class PlayerFire : MonoBehaviour
             CurrentCooldown = _fireCooldown;
         }
 
-
         // 1번 눌러서 자동발사 모드 설정 , 다시 1번 누르면 자동모드 OFF
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
@@ -62,22 +61,17 @@ public class PlayerFire : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             // 2. 총알 프리펩을 생성한다
-            /*
-            GameObject leftBullet = Instantiate(BulletPrefab);
-            leftBullet.transform.position = LeftFirePoint.position;
-            GameObject rightBullet = Instantiate(BulletPrefab);
-            rightBullet.transform.position = RightFirePoint.position;
-            */
+
             foreach (Transform firePoint in FirePoints)
             {
-                GameObject bullet = Instantiate(BulletPrefab);
+                Bullet bullet = BulletPool.Instance.GetBullet(BulletType.Main);
                 bullet.transform.position = firePoint.position;
             }
 
             foreach (Transform firePoint in SubFirePoints)
             {
-                GameObject bullet = Instantiate(SubBulletPrefabs);
-                bullet.transform.position = firePoint.position;
+                Bullet subBullet = BulletPool.Instance.GetBullet(BulletType.Sub);
+                subBullet.transform.position = firePoint.position;
             }
         }
     }
@@ -87,14 +81,14 @@ public class PlayerFire : MonoBehaviour
         _fireSprite.SetActive(true);
         foreach (Transform firePoint in FirePoints)
         {
-            GameObject bullet = Instantiate(BulletPrefab);
+            Bullet bullet = BulletPool.Instance.GetBullet(BulletType.Main);
             bullet.transform.position = firePoint.position;
         }
 
         foreach (Transform firePoint in SubFirePoints)
         {
-            GameObject bullet = Instantiate(SubBulletPrefabs);
-            bullet.transform.position = firePoint.position;
+            Bullet subBullet = BulletPool.Instance.GetBullet(BulletType.Sub);
+            subBullet.transform.position = firePoint.position;
         }
 
         CurrentCooldown = FireCooldown;

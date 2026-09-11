@@ -9,6 +9,7 @@ TagManager:
   - Item
   - FxTemporaire
   - Bomb
+  - Bullet
   layers:
   - Default
   - TransparentFX
