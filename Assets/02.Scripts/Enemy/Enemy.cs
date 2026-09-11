@@ -8,8 +8,7 @@ public abstract class Enemy : MonoBehaviour
     private bool _isDead;
 
     [Header("스폰할 아이템 데이터")]
-    //[SerializeField] private GameObject[] _itemPrefabs;
-    //[SerializeField] private float _itemSpawnRate;
+    [SerializeField] private float _spawnRate;
     [SerializeField] private ItemSpawnDataTableSO _itemSpawnDataTable;
 
     [Header("죽을때 폭발이펙트 프리펩")]
@@ -68,16 +67,11 @@ public abstract class Enemy : MonoBehaviour
 
     private void SpawnItem()
     {
-        /*
-        if (Random.Range(0, 100) < _itemSpawnRate)
+        if (Random.Range(0, 100) < _spawnRate)
         {
-            // TODO : Scriptable Object 를 사용해서 리팩토링
-            // 1. 배열을 사용했지만 각 아이템이 어떤 프리펩인지 알수가없음
-            // 2. 각 에너미 스폰 확률을 매직넘버로 하드코딩해서 유지보수가 어려움
-
-            Instantiate(_itemPrefabs[Random.Range(0, _itemPrefabs.Length)], transform.position, transform.rotation);
+            return;
         }
-        */
+
         int totalWeight = 0;
         foreach (ItemSpawnData data in _itemSpawnDataTable.Datas)
         {
@@ -92,7 +86,7 @@ public abstract class Enemy : MonoBehaviour
             cumulativeWeight += data.Weight;
             if (randomWeight < cumulativeWeight)
             {
-                Instantiate(data.ItemPrefab, transform.position, transform.rotation);
+                ItemPool.Instance.GetItem(data.Type, transform.position);
                 break;
             }
         }

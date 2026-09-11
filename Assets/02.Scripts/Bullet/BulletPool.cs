@@ -15,7 +15,7 @@ public class BulletPool : MonoBehaviour
 
     [Header("풀 사이즈")]
     [SerializeField] private int _bulletPoolSize;
-    [SerializeField] private int _subBulletPoolSize;
+    //[SerializeField] private int _subBulletPoolSize;
 
     // 생성한 총알을 담아둘 풀
     private Bullet[,] _bulletPool;

@@ -112,6 +112,7 @@ MonoBehaviour:
   _health: 40
   moveSpeed: 3
   _collisionDamage: 5
+  _spawnRate: 50
   _itemSpawnDataTable: {fileID: 11400000, guid: c69e0209c97bef84fac4dc88fb0299b5, type: 2}
   _deathEffectPrefab: {fileID: 2433282508537954060, guid: 3ef3ae421f71c5c4e97fe12dc2fc6312, type: 3}
 --- !u!50 &1651974507972656135

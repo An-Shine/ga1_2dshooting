@@ -2,14 +2,8 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    public enum ItemType
-    {
-        Heal,
-        SpeedUp,
-        FireRateUp
-    }
-
     [SerializeField] private ItemType _type;
+    public ItemType Type => _type;
     [SerializeField] private float _value;
     [SerializeField] private float _chaseInterval = 2f;
     private float _waitTimer;
@@ -76,6 +70,6 @@ public class Item : MonoBehaviour
                 break;
         }
 
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 }

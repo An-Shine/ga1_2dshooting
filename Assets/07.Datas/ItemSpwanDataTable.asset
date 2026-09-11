@@ -15,7 +15,10 @@ MonoBehaviour:
   Datas:
   - ItemPrefab: {fileID: 223148717703760377, guid: 5413495baea811943b4c69488452683e, type: 3}
     Weight: 30
+    Type: 2
   - ItemPrefab: {fileID: 3286855680934766456, guid: bc3bae4181caa7d45b799893ea12a189, type: 3}
     Weight: 30
+    Type: 0
   - ItemPrefab: {fileID: 2372010313765720662, guid: f6ccb0efb2f44a54c8e19bad58667d4e, type: 3}
     Weight: 30
+    Type: 1
