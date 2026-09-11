@@ -17,7 +17,6 @@ public abstract class Enemy : MonoBehaviour
     private Animator _animator;
     private static readonly int HitHash = Animator.StringToHash("Hit");
 
-    // Todo : Enemy 가 공격당할때 재생시켜줄 피격 사운드
     private EnemySound _enemySound;
 
     private void Awake()
@@ -26,14 +25,12 @@ public abstract class Enemy : MonoBehaviour
         _enemySound = GetComponent<EnemySound>();
     }
 
-
     private void Update()
     {
         Move();
     }
 
     protected abstract void Move();
-
 
     public void TakeDamage(int damage)
     {
@@ -70,6 +67,10 @@ public abstract class Enemy : MonoBehaviour
     {
         if (Random.Range(0, 100) < _itemSpawnRate)
         {
+            // TODO : Scriptable Object 를 사용해서 리팩토링
+            // 1. 배열을 사용했지만 각 아이템이 어떤 프리펩인지 알수가없음
+            // 2. 각 에너미 스폰 확률을 매직넘버로 하드코딩해서 유지보수가 어려움
+
             Instantiate(_itemPrefabs[Random.Range(0, _itemPrefabs.Length)], transform.position, transform.rotation);
         }
     }

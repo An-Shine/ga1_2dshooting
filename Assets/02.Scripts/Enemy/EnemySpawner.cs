@@ -1,13 +1,15 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [Header("스폰 간격")][SerializeField] private float _spawnInterval = 3f;
+    [Header("스폰 간격")]
+    [SerializeField] private float _spawnInterval = 3f;
     private float _timer;
 
     // -생성할 프리펩
-    [Header("스폰할 적 프리펩")][SerializeField] private GameObject[] _enemyPrefabs;
-    [SerializeField] private int[] _spawnRate;
+    [Header("스폰할 적 데이터")]
+    [SerializeField] private EnemySpawnDataTableSO _spawnDataTable;
 
     private void Update()
     {
@@ -15,29 +17,36 @@ public class EnemySpawner : MonoBehaviour
         if (_timer >= _spawnInterval)
         {
             _timer = 0;
-            _spawnInterval = UnityEngine.Random.Range(1f, 3f);
+            _spawnInterval = Random.Range(1f, 3f);
             Spawn();
         }
     }
 
     private void Spawn()
     {
-        int randomRate = Random.Range(0, 100);
-        int spawnCount = 0;
+        // 가중치 랜덤 선택
+        // 각 아이템에 가중치를 부여하고, 가중치가  클수록 높은 확률로 선택되도록 하는 방식
 
-        // TODO : Scriptable Object 를 사용해서 리팩토링
-        // 1. 배열을 사용했지만 각 아이템이 어떤 프리펩인지 알수가없음
-        // 2. 각 에너미 스폰 확률을 매직넘버로 하드코딩해서 유지보수가 어려움
-
-        for (int i = 0; i < _enemyPrefabs.Length; i++)
+        // 1. 추첨할수있는 모든 가중치를 더한다
+        int totalWeight = 0;
+        foreach (EnemySpawnData data in _spawnDataTable.Datas)
         {
-            spawnCount += _spawnRate[i];
+            totalWeight += data.Weight;
+        }
 
-            if (randomRate < spawnCount)
+        // 2. 전체 가중치 범위에서 랜덤한 정수를 뽑는다.
+        int randomWeight = Random.Range(0, totalWeight);
+
+        // 3. 가중치를 누적하면서 선택된 구간을 찾는다.
+        int cumulativeWeight = 0;
+        foreach (EnemySpawnData data in _spawnDataTable.Datas)
+        {
+            cumulativeWeight += data.Weight; // 누적
+            if (randomWeight < cumulativeWeight) // 구간
             {
-                GameObject enemy = Instantiate(_enemyPrefabs[i]);
+                GameObject enemy = Instantiate(data.EnemyPrefab);
                 enemy.transform.position = transform.position;
-                return;
+                break;
             }
         }
     }

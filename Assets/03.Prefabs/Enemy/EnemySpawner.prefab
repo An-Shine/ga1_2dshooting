@@ -45,3 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
   _spawnInterval: 3
+  _spawnDataTable: {fileID: 11400000, guid: 18b70e3374d17da4aa93a120a3876531, type: 2}
