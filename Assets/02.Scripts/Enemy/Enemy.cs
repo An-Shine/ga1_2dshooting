@@ -3,8 +3,12 @@ using UnityEngine;
 public abstract class Enemy : MonoBehaviour
 {
     [SerializeField] private int _health;
+    private int _maxHealth;
     [SerializeField] protected float moveSpeed;
     [SerializeField] private int _collisionDamage;
+    [SerializeField] private EnemyType _type;
+    public EnemyType Type => _type;
+
     private bool _isDead;
 
     [Header("스폰할 아이템 데이터")]
@@ -23,6 +27,14 @@ public abstract class Enemy : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         _enemySound = GetComponent<EnemySound>();
+        _maxHealth = _health;
+    }
+
+    private void OnEnable()
+    {
+        // 다시 활성화될때 초기화
+        _health = _maxHealth;
+        _isDead = false;
     }
 
     private void Update()
@@ -51,7 +63,7 @@ public abstract class Enemy : MonoBehaviour
 
             ScoreManager scoreManager = ScoreManager.Instance;
             scoreManager.AddScore(100);
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 
@@ -62,7 +74,7 @@ public abstract class Enemy : MonoBehaviour
         Player player = collision.gameObject.GetComponent<Player>();
 
         player.TakeDamage(_collisionDamage);
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
     private void SpawnItem()

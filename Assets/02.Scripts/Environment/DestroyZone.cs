@@ -14,7 +14,7 @@ public class DestroyZone : MonoBehaviour
         }
         else
         {
-            Destroy(collision.gameObject);
+            collision.gameObject.SetActive(false);
         }
     }
 }

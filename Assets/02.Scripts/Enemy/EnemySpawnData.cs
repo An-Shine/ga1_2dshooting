@@ -5,4 +5,5 @@ public class EnemySpawnData
 {
     public GameObject EnemyPrefab;
     public int Weight;
+    public EnemyType Type;
 }

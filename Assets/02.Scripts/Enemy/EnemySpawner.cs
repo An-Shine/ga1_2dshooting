@@ -44,8 +44,8 @@ public class EnemySpawner : MonoBehaviour
             cumulativeWeight += data.Weight; // 누적
             if (randomWeight < cumulativeWeight) // 구간
             {
-                GameObject enemy = Instantiate(data.EnemyPrefab);
-                enemy.transform.position = transform.position;
+                //GameObject enemy = Instantiate(data.EnemyPrefab);
+                EnemySpawnPool.Instance.GetEnemy(data.Type, transform.position);
                 break;
             }
         }
