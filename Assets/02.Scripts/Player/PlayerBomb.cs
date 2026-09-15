@@ -28,7 +28,7 @@ public class PlayerBomb : MonoBehaviour
             }
         }
 
-        if (_spawnCoolTime <= 0 && Input.GetKeyDown(KeyCode.B))
+        if (_spawnCoolTime <= 0 && SimpleInput.GetKeyDown(KeyCode.B))
         {
             _spawnCoolTime = 10f;
             _duration = 3f;

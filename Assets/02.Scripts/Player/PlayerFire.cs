@@ -19,7 +19,7 @@ public class PlayerFire : MonoBehaviour
     [SerializeField] private float _fireCooldown = 1.0f;
 
     public float FireCooldown => _fireCooldown;
-    private const float MinCoolTime = 0.06f;
+    private const float MinCoolTime = 0.1f;
     public float CurrentCooldown;
 
     public bool isAutoFire = false;
@@ -51,7 +51,8 @@ public class PlayerFire : MonoBehaviour
             Fire();
 
             // 업그레이드 수치를 적용한 쿨타임으로 초기화
-            float finalFireRate = _fireCooldown - UpgradeManager.Instance.Upgrades[1].CurrentValue;
+            float finalFireRate =
+                Mathf.Max(_fireCooldown - UpgradeManager.Instance.Upgrades[1].CurrentValue, MinCoolTime);
             CurrentCooldown = finalFireRate;
         }
     }

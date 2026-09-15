@@ -55,6 +55,6 @@ public class Upgrade
 
         _currentValue = _defaultValue + _level * _increaseValue;
         _nextValue = _defaultValue + (_level + 1) * _increaseValue;
-        _cost = (int)(_defaultCost + Mathf.Pow(_increaseCost, _level));
+        _cost = (int)(_defaultCost * Mathf.Pow(_increaseCost, _level));
     }
 }
