@@ -13,7 +13,6 @@ public class PlayerMove : MonoBehaviour
     public float MinPositionX;
     public float speedCount = 1.0f;
     public float speedLimit = 1.0f;
-    private Animator _animator;
     [SerializeField] private GameObject _trail;
 
     // 매 프레임마다 실행된다
@@ -37,8 +36,6 @@ public class PlayerMove : MonoBehaviour
 
         // 2. 키보드 입력에 따라 방향을 구한다.
         Vector2 normalizedDirection = new Vector2(h, v).normalized;
-
-        _animator.SetInteger("x", (int)normalizedDirection.x);
 
         // 3. 방향과 속력에 따라 이동한다.
         float finalSpeed = _speed + UpgradeManager.Instance.Upgrades[2].CurrentValue;
@@ -71,16 +68,11 @@ public class PlayerMove : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            _speed -= speedCount;
-            if (_speed <= speedLimit)
-            {
-                _speed = speedLimit; // 더이상 떨어지지 않게끔 , 하지만 기획의도에 따라 0으로 가게끔 수정가능
-            }
+            _speed++;
         }
-
-        if (Input.GetKeyDown(KeyCode.Q))
+        else if (Input.GetKeyDown(KeyCode.Q))
         {
-            _speed += speedCount;
+            _speed--;
         }
     }
 
