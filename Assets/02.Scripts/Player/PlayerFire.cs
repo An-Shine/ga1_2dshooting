@@ -24,6 +24,11 @@ public class PlayerFire : MonoBehaviour
 
     public bool isAutoFire = false;
 
+    public void SetAuto(bool auto)
+    {
+        isAutoFire = auto;
+    }
+
     private void Start()
     {
         CurrentCooldown = _fireCooldown;
@@ -39,6 +44,7 @@ public class PlayerFire : MonoBehaviour
             Fire();
 
             // 쿨타이머 초기화 (중요)
+            float finalFireRate = _fireCooldown - UpgradeManager.Instance.Upgrades[1].CurrentValue;
             CurrentCooldown = _fireCooldown;
         }
 

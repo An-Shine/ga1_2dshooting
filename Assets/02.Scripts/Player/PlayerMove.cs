@@ -7,19 +7,14 @@ public class PlayerMove : MonoBehaviour
     // 매직넘버 방지 : 보는사람에 따라 의미가 달라질 수 있는 숫자 값을 매직넘버 라고함
     [SerializeField] private float _speed;
     public float Speed => _speed;
-    public float limitTopY = -0.6f;
-    public float limitBottomY = -4.5f;
-    public float limitX = 3.0f;
+    public float MaxPositionY;
+    public float MinPositionY;
+    public float MaxPositionX;
+    public float MinPositionX;
     public float speedCount = 1.0f;
     public float speedLimit = 1.0f;
     private Animator _animator;
     [SerializeField] private GameObject _trail;
-
-    private void Awake()
-    {
-        // _animator = GetComponent<Animator>();
-        // 새 player 스프리이트는 좌우 움직일때 애니메이션 없음
-    }
 
     // 매 프레임마다 실행된다
     // 초당 프레임 실행 횟수 : 별다른 설정이 없을경우 가능한 많이
@@ -36,56 +31,40 @@ public class PlayerMove : MonoBehaviour
 
     private void Move()
     {
-        // 1. 키보드 입력을 받는다 (GetAxis / GetAxisRaw)
-        float h = Input.GetAxisRaw("Horizontal"); // 키보드 왼/오른쪽 입력 상태에 따라 -1f ~ 0 ~ 1f 를 반환
-        float v = Input.GetAxisRaw("Vertical"); // 키보드 위/아래 입력 상태에 따라 -1f ~ 0 ~ 1f 를 반환
+        // 1. 키보드 입력을 받는다.
+        float h = Input.GetAxisRaw("Horizontal");
+        float v = Input.GetAxisRaw("Vertical");
 
+        // 2. 키보드 입력에 따라 방향을 구한다.
+        Vector2 normalizedDirection = new Vector2(h, v).normalized;
 
-        // Debug.Log($"h:{h}, v:{v}");
+        _animator.SetInteger("x", (int)normalizedDirection.x);
 
-        // 2. 키보드 입력에 따라 방향을 구한다
-        // 게임에는 벡터 라는 타입이 있다. 벡터는 크기와 방향을 의미한다
+        // 3. 방향과 속력에 따라 이동한다.
+        float finalSpeed = _speed + UpgradeManager.Instance.Upgrades[2].CurrentValue;
+        Vector2 newPosition = transform.position + (Vector3)normalizedDirection * finalSpeed * Time.deltaTime;
 
-        Vector2 direction = new Vector2(h, v);
-        // 3. 방향과 속력에 따라 이동한다
-        // 속도 : 방향 * 속력
-        Vector2 normalizedDirection = direction.normalized;
-        //_animator.SetInteger("x", (int)normalizedDirection.x);
-        transform.Translate(normalizedDirection * _speed * Time.deltaTime);
-
-        //deltaTime : 이전 프레임으로부터 지금 프레임까지 시간이 얼마나 지났는지 ms 단위로 반환
-
-        // 새로운 위치 : 현재위치 + (방향 * 속력 * 시간)
-        //transform.position += (Vector3)direction * Speed * Time.deltaTime;
-
-        // 실습과제 1번
-        if (transform.position.y > limitTopY)
+        // 4. 위치 y에 제한이 있다.
+        if (newPosition.y > MaxPositionY)
         {
-            transform.position = new Vector2(transform.position.x, limitTopY);
+            newPosition.y = MaxPositionY;
         }
-        else if (transform.position.y < limitBottomY)
+        else if (newPosition.y < MinPositionY)
         {
-            transform.position = new Vector2(transform.position.x, limitBottomY);
+            newPosition.y = MinPositionY;
         }
 
-        // 실습과제 2번
-        if (transform.position.x > limitX)
+        // 5. 양 옆 끝으로 가면 반대쪽 방향으로 이동
+        if (newPosition.x > MaxPositionX)
         {
-            transform.position = new Vector2(-limitX, transform.position.y);
+            newPosition.x = MinPositionX;
         }
-        else if (transform.position.x < -limitX)
+        else if (newPosition.x < MinPositionX)
         {
-            transform.position = new Vector2(limitX, transform.position.y);
+            newPosition.x = MaxPositionX;
         }
 
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            _trail.SetActive(false);
-        }
-        else if (Input.GetKeyUp(KeyCode.DownArrow))
-        {
-            _trail.SetActive(true);
-        }
+        transform.position = newPosition;
     }
 
     private void SpeedChange()
