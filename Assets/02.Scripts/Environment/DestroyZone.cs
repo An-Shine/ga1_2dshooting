@@ -12,9 +12,13 @@ public class DestroyZone : MonoBehaviour
         {
             collision.gameObject.SetActive(false);
         }
-        else
+        else if (collision.gameObject.CompareTag("Enemy"))
         {
             collision.gameObject.SetActive(false);
+        }
+        else
+        {
+            Destroy(collision.gameObject);
         }
     }
 }
