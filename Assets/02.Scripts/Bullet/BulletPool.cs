@@ -49,7 +49,7 @@ public class BulletPool : MonoBehaviour
 
     public Bullet GetBullet(BulletType bulletType)
     {
-        for (int i = 0; i < _bulletPool.Length; i++) // 타입별로 순회하면서
+        for (int i = 0; i < _bulletPool.GetLength(0); i++) // 타입별로 순회하면서
         {
             if (_bulletPool[i, 0].Type != bulletType) // 첫번쨰 요소의 타입이 내가 원하는게 아니라면 스킵
             {

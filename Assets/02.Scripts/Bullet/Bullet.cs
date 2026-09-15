@@ -7,7 +7,6 @@ public class Bullet : MonoBehaviour
     [SerializeField] private int _damage;
     [SerializeField] private BulletType _type;
     public BulletType Type => _type;
-    public int Damage;
 
     private AudioSource _audioSource;
 
@@ -42,8 +41,8 @@ public class Bullet : MonoBehaviour
             gameObject.SetActive(false); // 비활성화
             // GetComponent<타입>() -> 게임 오브젝트가 가지고 있는 컴포넌트를 참조
             Enemy enemy = collision.gameObject.GetComponent<Enemy>();
-            int finalDamage = Damage + (int)UpgradeManager.Instance.Upgrades[0].CurrentValue;
-            enemy.TakeDamage(_damage);
+            int finalDamage = _damage + (int)UpgradeManager.Instance.Upgrades[0].CurrentValue;
+            enemy.TakeDamage(finalDamage);
         }
     }
 

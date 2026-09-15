@@ -110,8 +110,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ChaseEnemy
   _health: 40
+  _baseHealth: 40
   moveSpeed: 3
   _collisionDamage: 5
+  _type: 0
   _spawnRate: 50
   _itemSpawnDataTable: {fileID: 11400000, guid: c69e0209c97bef84fac4dc88fb0299b5, type: 2}
   _deathEffectPrefab: {fileID: 8194992990867289339, guid: 99bc28c0d45f51c4fbac01080b73edc7, type: 3}

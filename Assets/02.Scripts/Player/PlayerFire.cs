@@ -36,55 +36,30 @@ public class PlayerFire : MonoBehaviour
 
     private void Update()
     {
-        // 쿨타임 적용
-        CurrentCooldown -= Time.deltaTime;
-
-        if (CurrentCooldown <= 0 && Input.GetKeyDown(KeyCode.Space) && isAutoFire != true)
-        {
-            Fire();
-
-            // 쿨타이머 초기화 (중요)
-            float finalFireRate = _fireCooldown - UpgradeManager.Instance.Upgrades[1].CurrentValue;
-            CurrentCooldown = _fireCooldown;
-        }
-
         // 1번 눌러서 자동발사 모드 설정 , 다시 1번 누르면 자동모드 OFF
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             isAutoFire = !isAutoFire;
         }
 
-        if (isAutoFire == true && CurrentCooldown <= 0)
+        // 쿨타임 적용
+        CurrentCooldown -= Time.deltaTime;
+
+        // 쿨타임이 끝났고 스페이스바를 누르거나 자동 발사 모드라면 발사
+        if (CurrentCooldown <= 0 && (Input.GetKeyDown(KeyCode.Space) || isAutoFire))
         {
-            AutoFire();
+            Fire();
+
+            // 업그레이드 수치를 적용한 쿨타임으로 초기화
+            float finalFireRate = _fireCooldown - UpgradeManager.Instance.Upgrades[1].CurrentValue;
+            CurrentCooldown = finalFireRate;
         }
     }
 
     private void Fire()
     {
         _fireSprite.SetActive(true);
-        // 1. 스페이스바를 누르면 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            // 2. 총알 프리펩을 생성한다
 
-            foreach (Transform firePoint in FirePoints)
-            {
-                Bullet bullet = BulletPool.Instance.GetBullet(BulletType.Main);
-                bullet.transform.position = firePoint.position;
-            }
-
-            foreach (Transform firePoint in SubFirePoints)
-            {
-                Bullet subBullet = BulletPool.Instance.GetBullet(BulletType.Sub);
-                subBullet.transform.position = firePoint.position;
-            }
-        }
-    }
-
-    public void AutoFire()
-    {
-        _fireSprite.SetActive(true);
         foreach (Transform firePoint in FirePoints)
         {
             Bullet bullet = BulletPool.Instance.GetBullet(BulletType.Main);
@@ -96,8 +71,14 @@ public class PlayerFire : MonoBehaviour
             Bullet subBullet = BulletPool.Instance.GetBullet(BulletType.Sub);
             subBullet.transform.position = firePoint.position;
         }
+    }
 
-        CurrentCooldown = FireCooldown;
+    public void AutoFire()
+    {
+        Fire();
+
+        float finalFireRate = _fireCooldown - UpgradeManager.Instance.Upgrades[1].CurrentValue;
+        CurrentCooldown = finalFireRate;
     }
 
     public void FireRateUp(float upValue)

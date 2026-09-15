@@ -10,6 +10,7 @@ public class EnemySpawner : MonoBehaviour
     // -생성할 프리펩
     [Header("스폰할 적 데이터")]
     [SerializeField] private EnemySpawnDataTableSO _spawnDataTable;
+    [SerializeField] private EnemyBalanceDataTableSO _balanceDataTable;
 
     private void Update()
     {
@@ -44,10 +45,27 @@ public class EnemySpawner : MonoBehaviour
             cumulativeWeight += data.Weight; // 누적
             if (randomWeight < cumulativeWeight) // 구간
             {
-                //GameObject enemy = Instantiate(data.EnemyPrefab);
-                EnemySpawnPool.Instance.GetEnemy(data.Type, transform.position);
+                Enemy enemy = EnemySpawnPool.Instance.GetEnemy(data.Type, transform.position);
+                enemy.SetHealthBalance(GetHealthMultiplier());
                 break;
             }
         }
+    }
+
+    private float GetHealthMultiplier()
+    {
+        int bestScore = ScoreManager.Instance.BestScore;
+
+        foreach (EnemyBalanceData data in _balanceDataTable.Datas)
+        {
+            if (bestScore < data.RequiredScore)
+            {
+                return data.HealthMultiplier;
+            }
+        }
+
+        // 없다면 제일 마지막값 반환
+        int lastIndex = _balanceDataTable.Datas.Length - 1;
+        return _balanceDataTable.Datas[lastIndex].HealthMultiplier;
     }
 }

@@ -2,7 +2,8 @@ using UnityEngine;
 
 public abstract class Enemy : MonoBehaviour
 {
-    [SerializeField] private int _health;
+    [SerializeField] private int _health; // Enemy 현재체력
+    [SerializeField] private int _baseHealth; // Enemy 기준체력
     private int _maxHealth;
     [SerializeField] protected float moveSpeed;
     [SerializeField] private int _collisionDamage;
@@ -40,6 +41,12 @@ public abstract class Enemy : MonoBehaviour
     private void Update()
     {
         Move();
+    }
+
+    public void SetHealthBalance(float multiplier)
+    {
+        // 체력 초기화
+        _health = (int)(_baseHealth * multiplier);
     }
 
     protected abstract void Move();

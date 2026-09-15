@@ -109,7 +109,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82c437bc5ebce9f4f93bde11e4c92a36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ChaseMoveEnemy
-  _health: 40
+  _health: 50
+  _baseHealth: 50
   moveSpeed: 3
   _collisionDamage: 5
   _type: 1
