@@ -46,7 +46,8 @@ public abstract class Enemy : MonoBehaviour
     public void SetHealthBalance(float multiplier)
     {
         // 체력 초기화
-        _health = (int)(_baseHealth * multiplier);
+        _maxHealth = (int)(_baseHealth * multiplier);
+        _health = _maxHealth;
     }
 
     protected abstract void Move();
